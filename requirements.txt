@@ -1,0 +1,6 @@
+faker
+pytest
+kafka-python
+loguru
+pyspark==3.5.0
+duckdb
