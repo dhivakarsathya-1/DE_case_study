@@ -3,6 +3,10 @@ from src.common.config import Config
 
 class Utils:
 
+    """
+    This class is defined for repetitive utils to be used across the pipeline
+    """
+
     @classmethod
     def get_spark(cls):
         cls.spark_session = SparkSession.builder\

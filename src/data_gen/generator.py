@@ -5,6 +5,11 @@ import datetime
 
 class DataGenerator:
 
+    """
+    This class is responsible for generating mock data for real-time analysis
+    mock data schema considered - user_id, item_id, interaction_type, timestamp
+    """
+
     def __init__(self, num_users=10, num_items=10):
         self.fake = Faker()
         self.interaction_types = ['click', 'view', 'purchase']

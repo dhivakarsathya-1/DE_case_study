@@ -20,17 +20,22 @@ class InteractionTransformer:
         ).withColumn("batch_id", lit(batch_id))\
         .withColumn("partition_by_column", date_format(col("timestamp"), "yyyy-MM-dd-HH"))
 
-        # User Aggregations
+        # User Aggregations - finding count of interaction with interaction type
         user_interaction_df = cleaned_df.groupBy(col("user_id"), col("partition_by_column")).agg(
             count(col("interaction_type")).alias("total_user_interactions"),
             sp_max(col("timestamp")).alias("last_interaction")
+        ).select(
+            col("user_id"), col("total_user_interactions"), col("last_interaction"), col("partition_by_column")
         )
 
         # Maximum and minimum interactions per item.
-        item_interaction_df = cleaned_df.groupBy(col("item_id"), col("partition_by_column")).agg(
+        item_interaction_df = cleaned_df.groupBy(col("user_id"),col("item_id"), col("partition_by_column")).agg(
             count(col("interaction_type")).alias("total_item_interactions"),
             sp_min(col("timestamp")).alias("min_interaction_time"),
             sp_max(col("timestamp")).alias("max_interaction_time")
+        ).select(
+            col("item_id"), col("user_id"), col("total_item_interactions"), col("min_interaction_time"),
+            col("max_interaction_time"), col("partition_by_column")
         )
 
         final_transformed = {

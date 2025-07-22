@@ -1,5 +1,9 @@
 class Config:
 
+    """
+    This class is defined for configurations being used in the entire pipeline
+    """
+
     # Kafka settings
     BOOTSTRAP_SERVERS = "127.0.0.1:9092"
     TOPIC_NAME = "interactions"

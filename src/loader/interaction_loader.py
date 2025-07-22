@@ -4,6 +4,10 @@ from pyspark.sql import DataFrame
 
 class InteractionLoader:
 
+    """
+    Loads interaction transformed data to storage account for further analysis with DuckDB
+    """
+
     logger.info(f"Inside Loader")
 
     def __init__(self, destination_path, checkpoint_location):

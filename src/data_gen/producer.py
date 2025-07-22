@@ -6,13 +6,17 @@ from loguru import logger
 
 class KafkaProducerClient:
 
+    """
+    This class is responsible for producing the generated mock data to Kafka producer
+    Mention the Kafka topic, bootstrap servers and delay in processing as attributes to the function below
+    """
+
     def __init__(self, delay, topic, bootstrap_servers):
         self.delay = delay # introducing delay variable to control the rate of data generation
         self.topic = topic
         self.producer = KafkaProducer(
             bootstrap_servers = bootstrap_servers,
             value_serializer = lambda x: json.dumps(x).encode('utf-8')
-
         )
         self.data = DataGenerator()
 
